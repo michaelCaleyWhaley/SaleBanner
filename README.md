@@ -1,6 +1,6 @@
 
 
-#Sale Banner injection script
+# Sale Banner injection script
 
 Banner includes a number of options which are to be passed in via an options object.
 
