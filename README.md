@@ -20,5 +20,4 @@ The options currently available include:
 
 saleBanner is a constructor function. So you invoke it using the new keyword. Example below
 
-Markup : `var banner = new SaleBanner();`
-
+`var banner = new SaleBanner();`
