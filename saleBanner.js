@@ -14,7 +14,7 @@ function SaleBanner(options) {
     };
     this.createCTA = function (ctaInfo) {
         var element = document.createElement('a');
-        element.setAttribute('class', 'live-cta-light sale-live-cta');
+        element.setAttribute('class', 'live-cta-dark sale-live-cta');
         element.setAttribute('href', ctaInfo[0]);
         element = ref.appendDataTranslate(element);
         element.innerHTML = '<span class="en-inline">' + ctaInfo[1] + '</span><span class="nl-inline">' + ctaInfo[2] + '</span><span class="fr-inline">' + ctaInfo[3] + '</span><span class="de-inline">' + ctaInfo[4] + '</span>';
@@ -97,7 +97,12 @@ function SaleBanner(options) {
             if (options.pAlt) {
                 saleBanner.appendChild(this.pAlt());
             }
-            saleBanner.setAttribute('data-tracking-position', 'free-delivery');
+            if (options.dataTracking) {
+                saleBanner.setAttribute('data-tracking-position', options.dataTracking);
+            } else {
+                saleBanner.setAttribute('data-tracking-position', 'promo-banner');
+            }
+
             ref.insertElBefore(saleBanner, targetElement);
         }
         if (targetMobElement) {
@@ -113,22 +118,27 @@ function SaleBanner(options) {
             if (options.pAlt) {
                 mobSaleBanner.appendChild(this.pAlt());
             }
-            mobSaleBanner.setAttribute('data-tracking-position', 'free-delivery');
+            mobSaleBanner.setAttribute('data-tracking-position', 'promo-banner');
             ref.insertElBefore(mobSaleBanner, targetMobElement);
         }
     };
-    this.timeCheck = (function () {
+    this.timeCheck = function () {
         if (!options.start || !options.end) {
             return true;
         }
-        var serverDate = document.body.dataset.gen.split('/');
+        var serverDate;
+        if (document.getElementById('embargoDate') !== null && document.getElementById('embargoDate').value.length === 16) {
+            serverDate = document.getElementById('embargoDate').value.split('/');
+        } else {
+            serverDate = document.body.dataset.gen.split('/');
+        }
         var yearAndTime = serverDate[2].split(' ');
         var currentDate = {
             year: yearAndTime[0],
             month: serverDate[1],
             day: serverDate[0],
             time: yearAndTime[1],
-            dayTimeString: function(){
+            dayTimeString: function () {
                 return this.year + '-' + this.month + '-' + this.day + 'T' + this.time;
             }
         };
@@ -137,11 +147,34 @@ function SaleBanner(options) {
         var endDate = new Date(options.end);
         var runScript = todayDate >= startDate && todayDate < endDate ? true : false;
         return runScript;
-    })();
+    };
+
 
     this.init = (function () {
-        if (ref.timeCheck) {
-            ref.appendToPage();
-        };
+        // checks for staging and presence of date string
+        if (window.location.href.includes('staging')) {
+            var interval = setInterval(function () {
+                ref.timeCheck();
+                if (document.getElementById('embargoDate')) {
+                    clearInterval(interval);
+                    if (ref.timeCheck()) {
+                        ref.appendToPage();
+                    }
+                }
+            }, 10);
+            // to run if on www.
+        } else {
+            if (ref.timeCheck()) {
+                ref.appendToPage();
+            }
+        }
     })();
 }
+
+$(document).ready(function () {
+    setTimeout(function () {
+        trackingGenerator();
+    }, 10);
+});
+
+

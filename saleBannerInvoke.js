@@ -13,7 +13,10 @@ var exampleBanner = new SaleBanner({
     title: '20% OFF',
     link: '/terms',
     start: '11 april, 2018, 05:00',
-    end: '30 december, 2018, 09:00'
+    end: '30 december, 2018, 09:00',
+    dataTracking: 'student-banner'
 });
 
-// trackingGenerator();
+setTimeout(function(){
+    trackingGenerator();
+}, 10);
