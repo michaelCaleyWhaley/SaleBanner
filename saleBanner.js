@@ -1,7 +1,7 @@
 
 // REQUIRES saleBannerInvoke.js and saleBanner.css to function
 // MEAT
-// OPTIONS - class, target, title, link, h1, p, pAlt, cta, p2, date
+// OPTIONS - class, target, title, link, links, h1, p, pAlt, cta, p2, date
 // translations format en/nl/fr/de
 function SaleBanner(options) {
     var ref = this;
@@ -14,12 +14,22 @@ function SaleBanner(options) {
     };
     this.createCTA = function (ctaInfo) {
         var element = document.createElement('a');
-        element.setAttribute('class', 'live-cta-dark sale-live-cta');
+        element.setAttribute('class', 'live-cta-light sale-live-cta');
         element.setAttribute('href', ctaInfo[0]);
+        element.setAttribute('title', options.title);
         element = ref.appendDataTranslate(element);
         element.innerHTML = '<span class="en-inline">' + ctaInfo[1] + '</span><span class="nl-inline">' + ctaInfo[2] + '</span><span class="fr-inline">' + ctaInfo[3] + '</span><span class="de-inline">' + ctaInfo[4] + '</span>';
         return element;
     };
+
+    this.createLink = function (href, title, aclass) {
+        var element = document.createElement('a');
+        element.setAttribute('class', aclass);
+        element.setAttribute('href', href);
+        element.setAttribute('title', title);
+        return element;
+    };
+
     this.pAlt = function () {
         if (options.pAlt) {
             var pAlt = document.createElement('p');
@@ -99,12 +109,17 @@ function SaleBanner(options) {
             }
             if (options.dataTracking) {
                 saleBanner.setAttribute('data-tracking-position', options.dataTracking);
+            } if (options.links) {
+                options.links.forEach(function (element, index) {
+                    saleBanner.appendChild(ref.createLink(element.href, element.title, element.class));
+                });
             } else {
                 saleBanner.setAttribute('data-tracking-position', 'promo-banner');
             }
 
             ref.insertElBefore(saleBanner, targetElement);
         }
+
         if (targetMobElement) {
             var mobSaleBanner = document.createElement('div');
             mobSaleBanner.setAttribute('class', 'sale-banner-mob image');
@@ -118,7 +133,16 @@ function SaleBanner(options) {
             if (options.pAlt) {
                 mobSaleBanner.appendChild(this.pAlt());
             }
-            mobSaleBanner.setAttribute('data-tracking-position', 'promo-banner');
+            // mobSaleBanner.setAttribute('data-tracking-position', 'promo-banner');
+            if (options.dataTracking) {
+                mobSaleBanner.setAttribute('data-tracking-position', options.dataTracking);
+            } if (options.links) {
+                options.links.forEach(function (element, index) {
+                    mobSaleBanner.appendChild(ref.createLink(element.href, element.title, element.class));
+                });
+            } else {
+                mobSaleBanner.setAttribute('data-tracking-position', 'promo-banner');
+            }
             ref.insertElBefore(mobSaleBanner, targetMobElement);
         }
     };
@@ -148,7 +172,6 @@ function SaleBanner(options) {
         var runScript = todayDate >= startDate && todayDate < endDate ? true : false;
         return runScript;
     };
-
 
     this.init = (function () {
         // checks for staging and presence of date string
