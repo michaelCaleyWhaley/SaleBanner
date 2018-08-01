@@ -14,7 +14,7 @@ function SaleBanner(options) {
     };
     this.createCTA = function (ctaInfo) {
         var element = document.createElement('a');
-        element.setAttribute('class', 'live-cta-light sale-live-cta');
+        element.setAttribute('class', 'dark-rounded-cta sale-live-cta');
         element.setAttribute('href', ctaInfo[0]);
         element.setAttribute('title', options.title);
         element = ref.appendDataTranslate(element);
@@ -175,7 +175,7 @@ function SaleBanner(options) {
 
     this.init = (function () {
         // checks for staging and presence of date string
-        if (window.location.href.includes('staging')) {
+        if (window.location.href.indexOf('staging') !== -1) {
             var interval = setInterval(function () {
                 ref.timeCheck();
                 if (document.getElementById('embargoDate')) {
@@ -199,5 +199,4 @@ $(document).ready(function () {
         trackingGenerator();
     }, 10);
 });
-
 
