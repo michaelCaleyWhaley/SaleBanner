@@ -109,12 +109,13 @@ function SaleBanner(options) {
             }
             if (options.dataTracking) {
                 saleBanner.setAttribute('data-tracking-position', options.dataTracking);
-            } if (options.links) {
+            } else {
+                saleBanner.setAttribute('data-tracking-position', 'promo-banner');
+            }
+            if (options.links) {
                 options.links.forEach(function (element, index) {
                     saleBanner.appendChild(ref.createLink(element.href, element.title, element.class));
                 });
-            } else {
-                saleBanner.setAttribute('data-tracking-position', 'promo-banner');
             }
 
             ref.insertElBefore(saleBanner, targetElement);
@@ -136,12 +137,13 @@ function SaleBanner(options) {
             // mobSaleBanner.setAttribute('data-tracking-position', 'promo-banner');
             if (options.dataTracking) {
                 mobSaleBanner.setAttribute('data-tracking-position', options.dataTracking);
-            } if (options.links) {
+            } else {
+                mobSaleBanner.setAttribute('data-tracking-position', 'promo-banner');
+            }
+            if (options.links) {
                 options.links.forEach(function (element, index) {
                     mobSaleBanner.appendChild(ref.createLink(element.href, element.title, element.class));
                 });
-            } else {
-                mobSaleBanner.setAttribute('data-tracking-position', 'promo-banner');
             }
             ref.insertElBefore(mobSaleBanner, targetMobElement);
         }
