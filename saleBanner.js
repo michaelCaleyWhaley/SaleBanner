@@ -96,9 +96,9 @@ function SaleBanner(options) {
 
         if (targetElement) {
             var saleBanner = document.createElement('div');
-            saleBanner.setAttribute('class', 'sale-banner image');
+            saleBanner.setAttribute('class', 'sale-banner image content-promotion');
             if (options.class) {
-                saleBanner.setAttribute('class', options.class + " image");
+                saleBanner.setAttribute('class', options.class + " image content-promotion");
             }
             saleBanner.appendChild(ref.createNewElement());
             if (ref.liveArea()) {
@@ -123,9 +123,9 @@ function SaleBanner(options) {
 
         if (targetMobElement) {
             var mobSaleBanner = document.createElement('div');
-            mobSaleBanner.setAttribute('class', 'sale-banner-mob image');
+            mobSaleBanner.setAttribute('class', 'sale-banner-mob image content-promotion');
             if (options.class) {
-                mobSaleBanner.setAttribute('class', options.class + "-mob image");
+                mobSaleBanner.setAttribute('class', options.class + "-mob image content-promotion");
             }
             mobSaleBanner.appendChild(ref.createNewElement());
             if (ref.liveArea()) {
