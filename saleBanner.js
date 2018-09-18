@@ -7,7 +7,6 @@ function SaleBanner(options) {
     var ref = this;
     this.createNewElement = function () {
         var saleLink = document.createElement('a');
-        saleLink.setAttribute('href', options.link);
         saleLink.setAttribute('title', options.title);
         saleLink.setAttribute('class', 'sale-main-a');
         return saleLink;

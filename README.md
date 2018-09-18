@@ -9,7 +9,6 @@ The options currently available include:
 * class - to be added to the banner. There is a default if this is not specified
 * target - target div for the banner to appear above
 * title - text to be added to the title attribute of link in banner
-* link - href of link (depreciated)
 * links - An array of objects containing link info
 * h1 - Any title text to be inserted
 * p - any paragraph text to be inserted
