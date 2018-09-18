@@ -13,7 +13,7 @@ function SaleBanner(options) {
     };
     this.createCTA = function (ctaInfo) {
         var element = document.createElement('a');
-        element.setAttribute('class', 'dark-rounded-cta sale-live-cta');
+        element.setAttribute('class', 'fast-track link-hover');
         element.setAttribute('href', ctaInfo[0]);
         element.setAttribute('title', options.title);
         element = ref.appendDataTranslate(element);

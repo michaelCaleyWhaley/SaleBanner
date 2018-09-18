@@ -18,6 +18,9 @@ var exampleBanner = new SaleBanner({
         {href: '/example', title: 'example', class: 'example'},
         {href: '/example', title: 'example', class: 'example'},
         {href: '/example', title: 'example', class: 'example'}
+    ],
+    cta: [
+        [['/women', 'EN','NL','FR','DE'],]
     ]
 });
 
