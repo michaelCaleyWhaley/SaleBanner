@@ -173,6 +173,10 @@ function SaleBanner(options) {
         var runScript = todayDate >= startDate && todayDate < endDate ? true : false;
         return runScript;
     };
+    this.emitEvent = function(){
+        var bannerAttachedEvent = new Event('bannerAttached');
+        window.dispatchEvent(bannerAttachedEvent);
+    };
 
     this.init = (function () {
         // checks for staging and presence of date string
@@ -183,6 +187,7 @@ function SaleBanner(options) {
                     clearInterval(interval);
                     if (ref.timeCheck()) {
                         ref.appendToPage();
+                        ref.emitEvent();
                     }
                 }
             }, 10);
@@ -190,6 +195,7 @@ function SaleBanner(options) {
         } else {
             if (ref.timeCheck()) {
                 ref.appendToPage();
+                ref.emitEvent();
             }
         }
     })();
