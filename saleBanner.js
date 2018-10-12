@@ -5,6 +5,9 @@
 // translations format en/nl/fr/de
 function SaleBanner(options) {
     var ref = this;
+    this.html = function(element){
+        element.innerHTML += options.html;
+    };
     this.createNewElement = function () {
         var saleLink = document.createElement('a');
         saleLink.setAttribute('title', options.title);
@@ -116,6 +119,9 @@ function SaleBanner(options) {
                     saleBanner.appendChild(ref.createLink(element.href, element.title, element.class));
                 });
             }
+            if(options.html){
+                this.html(saleBanner);
+            }
 
             ref.insertElBefore(saleBanner, targetElement);
         }
@@ -143,6 +149,9 @@ function SaleBanner(options) {
                 options.links.forEach(function (element, index) {
                     mobSaleBanner.appendChild(ref.createLink(element.href, element.title, element.class));
                 });
+            }
+            if(options.html){
+                this.html(mobSaleBanner);
             }
             ref.insertElBefore(mobSaleBanner, targetMobElement);
         }

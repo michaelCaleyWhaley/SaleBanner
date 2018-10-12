@@ -18,6 +18,7 @@ The options currently available include:
 * start - start date for the banner to appear
 * end - end date for banner to appear
 * dataTracking - data-tracking-position tag
+* html - insert any html into the banner in a string
 
 
 ## Invoking
