@@ -173,11 +173,11 @@ function SaleBanner(options) {
         var runScript = todayDate >= startDate && todayDate < endDate ? true : false;
         return runScript;
     };
-    this.emitEvent = function(){
-        var bannerAttachedEvent = new Event('bannerAttached');
-        window.dispatchEvent(bannerAttachedEvent);
+    this.callBack = function(){
+        if(options.callback){
+            options.callback();
+        }
     };
-
     this.init = (function () {
         // checks for staging and presence of date string
         if (window.location.href.indexOf('staging') !== -1) {
@@ -187,7 +187,7 @@ function SaleBanner(options) {
                     clearInterval(interval);
                     if (ref.timeCheck()) {
                         ref.appendToPage();
-                        ref.emitEvent();
+                        ref.callBack();
                     }
                 }
             }, 10);
@@ -195,7 +195,7 @@ function SaleBanner(options) {
         } else {
             if (ref.timeCheck()) {
                 ref.appendToPage();
-                ref.emitEvent();
+                ref.callBack();
             }
         }
     })();

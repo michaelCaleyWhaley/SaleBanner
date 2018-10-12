@@ -11,7 +11,7 @@ The options currently available include:
 * title - text to be added to the title attribute of link in banner
 * links - An array of objects containing link info
 * h1 - Any title text to be inserted
-* p - any paragraph text to be inserted
+* p - paragraph, takes an array of 4 entries en/nl/fr/de
 * pAlt - alternate text
 * cta - the details of any cta to be passed as an array of sub arrays containing details for each cta. Formatted [[href, en-title, nl-title, fr-title, de-title]]. The script will loop through the array creating as many as you have provided.
 * p2 - a final paragraph element
